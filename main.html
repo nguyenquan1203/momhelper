@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trường THPT Nguyễn Trãi - Kết nối & Trải nghiệm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bổ sung CSS cho thư viện trượt ảnh (Swiper) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .hero-bg {
+        /* MỤC 1: THAY ẢNH CỔNG TRƯỜNG Ở ĐÂY */
+        background-image:
+          linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)),
+          url("congtruong.webp");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      /* Swiper Carousel CSS */
+      .swiper {
+        width: 100%;
+        padding-bottom: 40px !important;
+      }
+      .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: #2563eb !important;
+      } /* Màu xanh blue-600 */
+
+      /* Lightbox */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+      }
+      .lightbox img {
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .close-lightbox {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- PHẦN 1: HERO BANNER -->
+    <header
+      class="hero-bg h-screen flex flex-col justify-center items-center text-center px-4 relative"
+    >
+      <div class="animate-fade-in-up">
+        <!-- MỤC 2: THAY LOGO TRƯỜNG Ở ĐÂY (Nếu có) -->
+        <img
+          src="logo.jpg"
+          alt="Logo THPT Nguyễn Trãi"
+          class="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full shadow-lg border-4 border-white object-cover"
+        />
+
+        <h1
+          class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-md"
+        >
+          TRƯỜNG THPT NGUYỄN TRÃI
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light"
+        >
+          Nơi ươm mầm tri thức - Chắp cánh những ước mơ
+        </p>
+
+        <a
+          href="#teachers"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto w-fit"
+        >
+          Khám phá ngay <i class="fas fa-arrow-down animate-bounce"></i>
+        </a>
+      </div>
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/50 text-3xl animate-bounce"
+      >
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <!-- PHẦN 2: TẬP THỂ CÁN BỘ - GIÁO VIÊN (SLIDER 3 ẢNH) -->
+    <section id="teachers" class="py-16 bg-white overflow-hidden">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">
+            Đội ngũ Cán bộ - Giáo viên
+          </h2>
+          <div class="w-16 h-1 bg-blue-600 mx-auto rounded"></div>
+        </div>
+
+        <!-- Khung trượt ảnh Swiper -->
+        <div class="swiper teacherSwiper shadow-xl rounded-2xl cursor-pointer">
+          <div class="swiper-wrapper">
+            <!-- MỤC 3.1: ẢNH TẬP THỂ 1 -->
+            <div
+              class="swiper-slide"
+              onclick="openLightbox(this.querySelector('img').src)"
+            >
+              <img
+                src="tapthe.png"
+                alt="Tập thể Giáo viên 1"
+                class="w-full h-64 md:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+
+            <!-- MỤC 3.2: ẢNH TẬP THỂ 2 -->
+            <div
+              class="swiper-slide"
+              onclick="openLightbox(this.querySelector('img').src)"
+            >
+              <img
+                src="tapthe2.png"
+                alt="Tập thể Giáo viên 2"
+                class="w-full h-64 md:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+
+            <!-- MỤC 3.3: ẢNH TẬP THỂ 3 -->
+            <div
+              class="swiper-slide"
+              onclick="openLightbox(this.querySelector('img').src)"
+            >
+              <img
+                src="tapthe3.png"
+                alt="Tập thể Giáo viên 3"
+                class="w-full h-64 md:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+          <!-- Các chấm tròn điều hướng bên dưới ảnh -->
+          <div class="swiper-pagination"></div>
+          <!-- Mũi tên điều hướng (ẩn trên mobile, hiện trên PC) -->
+          <div
+            class="swiper-button-next hidden md:flex !text-white !bg-black/30 w-10 h-10 rounded-full !scale-50"
+          ></div>
+          <div
+            class="swiper-button-prev hidden md:flex !text-white !bg-black/30 w-10 h-10 rounded-full !scale-50"
+          ></div>
+        </div>
+
+        <p class="text-center text-sm text-gray-500 mt-2">
+          <i class="fas fa-search-plus mr-1"></i> Bấm vào ảnh để phóng to
+        </p>
+      </div>
+    </section>
+
+    <!-- PHẦN 3: KHÔNG GIAN VĂN HOÁ ĐỌC (ĐÃ CẬP NHẬT) -->
+    <section id="reading-culture" class="py-16 bg-gray-100">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">Góc thư viện</h2>
+          <div class="w-16 h-1 bg-red-500 mx-auto rounded"></div>
+        </div>
+
+        <!-- MỤC 4.1: POSTER NGANG GIỚI THIỆU SÁCH (ẢNH MỚI SỐ 1) -->
+        <!-- Tôi đang để link tên file là poster.jpg theo đúng file bạn upload. 
+                 Nhớ copy file poster.jpg vào cùng thư mục với file HTML này nhé -->
+        <div
+          class="mb-10 max-w-5xl mx-auto rounded-2xl shadow-xl overflow-hidden cursor-pointer group bg-white p-2 md:p-3"
+          onclick="openLightbox(this.querySelector('img').src)"
+        >
+          <img
+            src="poster.jpg"
+            onerror="
+              this.src =
+                'https://placehold.co/1200x800/e2e8f0/475569?text=Poster+Gioi+Thieu+Sach'
+            "
+            alt="Poster Sách Ôn Thi 2026"
+            class="w-full h-auto rounded-xl object-cover transition duration-500 transform group-hover:scale-[1.02]"
+          />
+          <p class="text-center text-sm text-gray-500 mt-3">
+            <i class="fas fa-search-plus mr-1"></i> Bấm vào poster để xem chi
+            tiết các môn ôn thi
+          </p>
+        </div>
+
+        <!-- MỤC 4.2: HAI VIDEO GIỚI THIỆU (Gồm 1 cũ + 1 mới thêm) -->
+        <div class="grid md:grid-cols-2 gap-6 mb-12 max-w-6xl mx-auto">
+          <!-- Video 1 (Ví dụ: Video chung về văn hóa đọc) -->
+          <div
+            class="bg-white p-2 md:p-3 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="aspect-w-16 aspect-h-9 relative rounded-xl overflow-hidden bg-gray-200"
+              style="padding-bottom: 56.25%"
+            >
+              <iframe
+                class="absolute top-0 left-0 w-full h-full"
+                src="https://drive.google.com/file/d/1KVdAD2DLxs3j9heHkpcc84Py0SCZJRV3/preview"
+                title="Video 1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="text-center font-medium mt-3 text-gray-700">
+              Góc sách hay
+            </p>
+          </div>
+
+          <!-- Video 2 (Ví dụ: Video giới thiệu không gian thư viện) -->
+          <div
+            class="bg-white p-2 md:p-3 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="aspect-w-16 aspect-h-9 relative rounded-xl overflow-hidden bg-gray-200"
+              style="padding-bottom: 56.25%"
+            >
+              <iframe
+                class="absolute top-0 left-0 w-full h-full"
+                src="https://drive.google.com/file/d/16OyAjKSSYgn7VncAiESRdOiD7KjFr6m1/preview"
+                title="Video 2"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <p class="text-center font-medium mt-3 text-gray-700">
+              Góc sách hay
+            </p>
+          </div>
+        </div>
+
+        <!-- MỤC 4.3: THƯ VIỆN ẢNH (Gồm các ảnh cũ + 2 ẢNH MỚI SỐ 2 & 3) -->
+        <!-- Chỉnh layout lại thành 4 cột trên PC để chứa đủ ảnh hơn -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <!-- Ảnh 1 -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="hocsinhdoc1.jpg"
+              alt="Học sinh đọc sách"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+          <!-- Ảnh 2 -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="trangtri1.jpg"
+              alt="Gian trang trí 1"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+          <!-- Ảnh 3 -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="trangtri2.jpg"
+              alt="Gian trang trí 2"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+          <!-- Ảnh 4 -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="hocsinhdoc2.jpg"
+              alt="Hoạt động"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+
+          <!-- Ảnh trung tâm (Toàn cảnh - Kéo dài ngang 2 cột) -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white col-span-2 cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="hocsinh3.jpg"
+              alt="Toàn cảnh"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+
+          <!-- 2 ẢNH MỚI BỔ SUNG Ở ĐÂY -->
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="trangtri4.jpg"
+              alt="Ảnh mới 1"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+          <div
+            class="overflow-hidden rounded-lg shadow-sm bg-white cursor-pointer group"
+            onclick="openLightbox(this.querySelector('img').src)"
+          >
+            <img
+              src="trangtri3.jpg"
+              alt="Ảnh mới 2"
+              class="w-full h-32 md:h-48 object-cover transition duration-300 transform group-hover:scale-110"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 4: KẾT NỐI -->
+    <section class="py-16 bg-white relative">
+      <div
+        class="absolute inset-0 bg-cover bg-center opacity-10"
+        style="
+          background-image: url(&quot;https://placehold.co/1200x800/cbd5e1/ffffff?text=Background&quot;);
+        "
+      ></div>
+      <div class="max-w-4xl mx-auto px-4 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- MỤC 6.1: LINK FANPAGE -->
+          <a
+            href="https://www.facebook.com/nguyentraiak"
+            target="_blank"
+            class="flex items-center p-6 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl shadow-lg hover:-translate-y-1 transition-transform"
+          >
+            <div class="bg-white p-4 rounded-full text-blue-600 mr-5">
+              <i class="fab fa-facebook-f text-2xl w-6 text-center"></i>
+            </div>
+            <div>
+              <h3 class="text-white text-xl font-bold">Fanpage Đoàn Trường</h3>
+            </div>
+          </a>
+          <!-- MỤC 6.2: LINK THƯ VIỆN -->
+          <a
+            href="https://thptnguyentrai.gialai.edu.vn/"
+            target="_blank"
+            class="flex items-center p-6 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-2xl shadow-lg hover:-translate-y-1 transition-transform"
+          >
+            <div class="bg-white p-4 rounded-full text-emerald-600 mr-5">
+              <i class="fas fa-book-reader text-2xl w-6 text-center"></i>
+            </div>
+            <div>
+              <h3 class="text-white text-xl font-bold">Trang web nhà trường</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+      class="bg-slate-900 text-gray-300 pt-16 pb-8 border-t-4 border-blue-600 relative overflow-hidden"
+    >
+      <!-- Hiệu ứng màu nền nhẹ ở góc -->
+      <div
+        class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-blue-600 opacity-5 blur-3xl pointer-events-none"
+      ></div>
+
+      <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <!-- Cấu trúc 4 cột cho Footer -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"
+        >
+          <!-- Cột 1: Giới thiệu & Logo -->
+          <div>
+            <h3
+              class="text-white text-xl md:text-2xl font-bold mb-4 flex items-center gap-3"
+            >
+              <img
+                src="logo.jpg"
+                alt="Logo"
+                class="w-12 h-12 rounded-full border-2 border-slate-700"
+              />
+              THPT Nguyễn Trãi
+            </h3>
+            <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+              Nơi ươm mầm tri thức, chắp cánh những ước mơ. Thư viện trường luôn
+              chào đón các bạn học sinh đến khám phá không gian học tập sáng
+              tạo.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="https://facebook.com/nguyentraiak"
+                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://www.youtube.com/@thptnguyentraiankhe7364"
+                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a
+                href="https://thptnguyentrai.gialai.edu.vn"
+                class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fas fa-globe"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Cột 3: Thông tin liên hệ -->
+          <div>
+            <h4
+              class="text-white text-lg font-semibold mb-5 uppercase tracking-wider relative inline-block"
+            >
+              Thông tin liên hệ
+              <span
+                class="absolute -bottom-1 left-0 w-1/2 h-1 bg-emerald-500 rounded"
+              ></span>
+            </h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li class="flex items-start gap-3">
+                <i
+                  class="fas fa-map-marker-alt mt-1 text-emerald-500 w-4 text-center"
+                ></i>
+                <span>157 Lê Thị Hồng Gấm, Tỉnh Gia Lai, Vietnam, 6300</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i
+                  class="fas fa-phone-alt text-emerald-500 w-4 text-center"
+                ></i>
+                <span>093 538 12 94</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fas fa-envelope text-emerald-500 w-4 text-center"></i>
+                <span>thptngtrai@gmail.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Cột 4: Giờ mở cửa thư viện -->
+          <div>
+            <h4
+              class="text-white text-lg font-semibold mb-5 uppercase tracking-wider relative inline-block"
+            >
+              Giờ mở cửa thư viện
+              <span
+                class="absolute -bottom-1 left-0 w-1/2 h-1 bg-amber-500 rounded"
+              ></span>
+            </h4>
+            <div
+              class="bg-slate-800 rounded-lg p-4 text-sm border border-slate-700"
+            >
+              <div
+                class="flex justify-between border-b border-slate-700 pb-2 mb-2"
+              >
+                <span class="text-slate-300">Sáng (T2 - T7):</span>
+                <span class="text-amber-400 font-medium">07:00 - 11:00</span>
+              </div>
+              <div class="flex justify-between pb-2 mb-2">
+                <span class="text-slate-300">Chiều (T2 - T6):</span>
+                <span class="text-amber-400 font-medium">13:30 - 17:00</span>
+              </div>
+              <div
+                class="text-center text-xs text-slate-500 mt-2 pt-2 border-t border-slate-700"
+              >
+                (Chủ nhật và Ngày lễ nghỉ)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dòng bản quyền cuối cùng -->
+        <div
+          class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500"
+        >
+          <p>&copy; 2026 Sở GD&ĐT Gia Lai - Trường THPT Nguyễn Trãi.</p>
+          <div class="flex space-x-4">
+            <span class="hover:text-white transition-colors cursor-pointer"
+              >Hoạt động Văn hóa Đọc</span
+            >
+            <span>|</span>
+            <span class="hover:text-white transition-colors cursor-pointer"
+              >Tổ Cộng tác viên thư viện</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+      <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+      <img id="lightboxImg" src="" alt="Zoomed Image" />
+    </div>
+
+    <!-- Scripts cho Swiper và Lightbox -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      // Khởi tạo slider cho ảnh giáo viên
+      var swiper = new Swiper(".teacherSwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true, // Lặp lại vô hạn
+        autoplay: {
+          delay: 3500, // Tự động chuyển sau 3.5s
+          disableOnInteraction: false, // Vẫn tự chạy sau khi người dùng vuốt
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+      // Xử lý Lightbox
+      function openLightbox(src) {
+        document.getElementById("lightboxImg").src = src;
+        document.getElementById("imageLightbox").style.display = "flex";
+        document.body.style.overflow = "hidden";
+        swiper.autoplay.stop(); // Dừng trượt ảnh khi đang xem phóng to
+      }
+
+      function closeLightbox() {
+        document.getElementById("imageLightbox").style.display = "none";
+        document.body.style.overflow = "auto";
+        swiper.autoplay.start(); // Tiếp tục trượt ảnh khi đóng
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
+    </script>
+  </body>
+</html>
